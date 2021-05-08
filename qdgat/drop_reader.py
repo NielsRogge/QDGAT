@@ -227,6 +227,9 @@ def is_whitespace(c):
     return False
 
 def drop_tokenize(text, tokenizer, is_answer=False):
+    print("Original text:")
+    print(text)
+
     split_tokens = []
     sub_token_offsets = []
 
@@ -400,18 +403,18 @@ def drop_tokenize(text, tokenizer, is_answer=False):
             tid = 0
             ntid = 0
 
-#    print('==============entities==================\n'+text)
-#    for i,items in enumerate(new_sentences_entites):
-#      print(split_tokens[0 if i==0 else sentence_ids[i-1]+1:sentence_ids[i]+1])
-#      for item in items:
-#        print(item,split_tokens[item[0]:item[0]+item[-1]], end='')
-#      print('')
-#    print('==============numbers==================\n'+text)
-#    for i,items in enumerate(new_sentences_num):
-#      print(split_tokens[0 if i==0 else sentence_ids[i-1]+1:sentence_ids[i]+1])
-#      for item in items:
-#        print(item,split_tokens[item[0]:item[0]+item[-1]], end='')
-#      print('')
+    print('==============entities==================\n'+text)
+    for i,items in enumerate(new_sentences_entites):
+        print(split_tokens[0 if i==0 else sentence_ids[i-1]+1:sentence_ids[i]+1])
+        for item in items:
+            print(item,split_tokens[item[0]:item[0]+item[-1]], end='')
+            print('')
+    print('==============numbers==================\n'+text)
+    for i,items in enumerate(new_sentences_num):
+        print(split_tokens[0 if i==0 else sentence_ids[i-1]+1:sentence_ids[i]+1])
+        for item in items:
+            print(item,split_tokens[item[0]:item[0]+item[-1]], end='')
+            print('')
 
     for i in range(len(gnodes)):
       if gnodes_type[i] in NUM_NER_TYPES:
@@ -422,15 +425,13 @@ def drop_tokenize(text, tokenizer, is_answer=False):
 
     assert len(split_tokens) == len(sub_token_offsets)
 
-#    print('==============gnodes==================\n'+text)
-#    for gnode,glen,gtype  in zip(gnodes, gnodes_len, gnodes_type):
-#      print(split_tokens[gnode:gnode+glen],gtype)
-#    print('==============gedges==================\n'+text)
-#    for edge  in gedges:
-#      print(' '.join(split_tokens[gnodes[edge[0]]:gnodes[edge[0]]+gnodes_len[edge[0]]])+'('+gnodes_type[edge[0]]+')->'+' '.join(split_tokens[gnodes[edge[1]]:gnodes[edge[1]]+gnodes_len[edge[1]]])+'('+gnodes_type[edge[1]]+')')
+    print('==============gnodes==================\n'+text)
+    for gnode,glen,gtype  in zip(gnodes, gnodes_len, gnodes_type):
+        print(split_tokens[gnode:gnode+glen],gtype)
+    print('==============gedges==================\n'+text)
+    for edge  in gedges:
+        print(' '.join(split_tokens[gnodes[edge[0]]:gnodes[edge[0]]+gnodes_len[edge[0]]])+'('+gnodes_type[edge[0]]+')->'+' '.join(split_tokens[gnodes[edge[1]]:gnodes[edge[1]]+gnodes_len[edge[1]]])+'('+gnodes_type[edge[1]]+')')
 
-
-   
     return split_tokens, sub_token_offsets, numbers, number_indices, number_len, word_piece_mask, new_text, gnodes, gnodes_len, gnodes_type, gedges
 
 def clean(text):
