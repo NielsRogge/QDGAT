@@ -404,16 +404,16 @@ def drop_tokenize(text, tokenizer, is_answer=False):
             ntid = 0
 
     print('==============entities==================\n'+text)
-    for i,items in enumerate(new_sentences_entites):
+    for i, items in enumerate(new_sentences_entites):
         print(split_tokens[0 if i==0 else sentence_ids[i-1]+1:sentence_ids[i]+1])
         for item in items:
-            print(item,split_tokens[item[0]:item[0]+item[-1]], end='')
+            print(item, split_tokens[item[0]:item[0]+item[-1]], end='')
             print('')
     print('==============numbers==================\n'+text)
-    for i,items in enumerate(new_sentences_num):
+    for i, items in enumerate(new_sentences_num):
         print(split_tokens[0 if i==0 else sentence_ids[i-1]+1:sentence_ids[i]+1])
         for item in items:
-            print(item,split_tokens[item[0]:item[0]+item[-1]], end='')
+            print(item, split_tokens[item[0]:item[0]+item[-1]], end='')
             print('')
 
     for i in range(len(gnodes)):
@@ -546,7 +546,7 @@ class DropReader(object):
       
         file_path = cached_path(file_path)
         print("Reading file at %s", file_path)
-        with open(file_path) as dataset_file:
+        with open(file_path, encoding='utf-8-sig') as dataset_file:
             dataset = json.load(dataset_file)
         print("Reading the dataset")
         instances, skip_count = [], 0
